@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Explore - Out of Country Adventures</title>
+<!-- Leaflet CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<style>
+  body {font-family: Arial, sans-serif; margin:0; line-height:1.6; background:#f9f9f9; color:#333;}
+  header {background:#0077b6; color:white; padding:20px; text-align:center;}
+  nav ul {list-style:none; display:flex; justify-content:center; gap:20px; padding:0;}
+  nav ul li a {color:white; text-decoration:none;}
+  section {padding:40px; text-align:center;}
+  .explore-list {display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:20px;}
+  .place {border:1px solid #ccc; border-radius:10px; overflow:hidden; padding:15px; transition:0.3s; background:white;}
+  .place img {width:100%; height:180px; object-fit:cover; border-radius:10px;}
+  .place:hover {transform:scale(1.05);}
+  .wishlist-btn {margin-top:10px; padding:5px 10px; border:none; background:#023e8a; color:white; border-radius:5px; cursor:pointer;}
+  .wishlist-btn:hover {background:#001845;}
+  .price {font-weight:bold; margin-top:10px; color:#0077b6;}
+  #map {height:500px; width:100%; margin-top:30px; border-radius:10px; border:1px solid #ccc;}
+  footer {background:#03045e; color:white; padding:20px; text-align:center; margin-top:40px;}
+  input, textarea {width:100%; box-sizing:border-box;}
+  button {transition:0.3s;}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Explore Adventures</h1>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="explore.html">Explore</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section>
+  <h2>Discover Worldwide Destinations</h2>
+  <div class="explore-list">
+    <!-- Europe -->
+    <div class="place" data-name="Switzerland">
+      <img src="https://images.unsplash.com/photo-1526779259212-29c69f5f7f4e?auto=format&fit=crop&w=800&q=80" alt="Switzerland">
+      <h3>Hiking in Switzerland</h3>
+      <p>Breathtaking alpine views and trails for all levels.</p>
+      <div class="price">From $1200</div>
+      <button class="wishlist-btn">Add to Wishlist</button>
+    </div>
+    <div class="place" data-name="Paris">
+      <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="Paris">
+      <h3>City Tour in Paris</h3>
+      <p>Explore museums, cafes, and landmarks in the city of love.</p>
+      <div class="price">From $1300</div>
+      <button class="wishlist-btn">Add to Wishlist</button>
+    </div>
+    <div class="place" data-name="Santorini">
+      <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80" alt="Santorini">
+      <h3>Sunset in Santorini</h3>
+      <p>White-washed buildings and stunning sunsets in Greece.</p>
+      <div class="price">From $1350</div>
+      <button class="wishlist-btn">Add to Wishlist</button>
+    </div>
+
+    <!-- Africa -->
+    <div class="place" data-name="Kenya">
+      <img src="https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=800&q=80" alt="Kenya Safari">
+      <h3>Safari in Kenya</h3>
+      <p>Witness wildlife in its natural habitat.</p>
+      <div class="price">From $1500</div>
+      <button class="wishlist-btn">Add to Wishlist</button>
+    </div>
+
+    <!-- Asia -->
+    <div class="place" data-name="Bali">
+      <img src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?auto=format&fit=crop&w=800&q=80" alt="Bali">
+      <h3>Island Paradise in Bali</h3>
+      <p>Surf, yoga retreats, and tropical beaches await.</p>
+      <div class="price">From $1100</div>
+      <button class="wishlist-btn">Add to Wishlist</button>
+    </div>
+    <div class="place" data-name="Tokyo">
+      <img src="https://images.unsplash.com/photo-1533642630676-64fbc936e3d3?auto=format&fit=crop&w=800&q=80" alt="Tokyo">
+      <h3>City Lights in Tokyo</h3>
+      <p>Modern city with ancient traditions and incredible cuisine.</p>
+      <div class="price">From $1400</div>
+      <button class="wishlist-btn">Add to Wishlist</button>
+    </div>
+    <div class="place" data-name="Maldives">
+      <img src="https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=800&q=80" alt="Maldives">
+      <h3>Relax in Maldives</h3>
+      <p>Crystal clear waters and luxury resorts.</p>
+      <div class="price">From $2000</div>
+      <button class="wishlist-btn">Add to Wishlist</button>
+    </div>
+
+    <!-- Americas -->
+    <div class="place" data-name="Rio de Janeiro">
+      <img src="https://images.unsplash.com/photo-1526779259212-29c69f5f7f4e?auto=format&fit=crop&w=800&q=80" alt="Rio">
+      <h3>Festive Rio de Janeiro</h3>
+      <p>Experience beaches, carnival, and vibrant culture.</p>
+      <div class="price">From $1250</div>
+      <button class="wishlist-btn">Add to Wishlist</button>
+    </div>
+    <div class="place" data-name="New York">
+      <img src="https://images.unsplash.com/photo-1505761671935-60b3a7427bad?auto=format&fit=crop&w=800&q=80" alt="New York">
+      <h3>New York City</h3>
+      <p>Skyscrapers, Broadway shows, and endless attractions.</p>
+      <div class="price">From $1600</div>
+      <button class="wishlist-btn">Add to Wishlist</button>
+    </div>
+
+    <!-- USA Example -->
+    <div class="place" data-name="Florida">
+      <img src="https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=800&q=80" alt="Florida">
+      <h3>Florida Sunshine</h3>
+      <p>Theme parks, beaches, and vibrant nightlife.</p>
+      <div class="price">From $1400</div>
+      <button class="wishlist-btn">Add to Wishlist</button>
+    </div>
+    <div class="place" data-name="Alaska">
+      <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="Alaska">
+      <h3>Alaska Adventure</h3>
+      <p>Explore glaciers, wildlife, and scenic landscapes.</p>
+      <div class="price">From $1800</div>
+      <button class="wishlist-btn">Add to Wishlist</button>
+    </div>
+    <div class="place" data-name="California">
+      <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80" alt="California">
+      <h3>California Highlights</h3>
+      <p>Beaches, national parks, and city life in the Golden State.</p>
+      <div class="price">From $1500</div>
+      <button class="wishlist-btn">Add to Wishlist</button>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Map of Destinations</h2>
+  <div id="map"></div>
+</section>
+
+<section>
+  <h2>Contact Us</h2>
+  <div style="display:flex; justify-content:center; flex-wrap:wrap; gap:30px; margin-top:20px;">
+    <div class="widget">
+      <h3>Email</h3>
+      <p>info@outofcountryadventures.com</p>
+    </div>
+    <div class="widget">
+      <h3>Phone</h3>
+      <p>+1 234 567 890</p>
+    </div>
+    <div class="widget">
+      <h3>Address</h3>
+      <p>123 Adventure Lane, Travel City, USA</p>
+    </div>
+  </div>
+  <form style="max-width:600px; margin:30px auto; display:flex; flex-direction:column; gap:10px;">
+    <input type="text" placeholder="Your Name" required>
+    <input type="email" placeholder="Your Email" required>
+    <textarea placeholder="Your Message" rows="5" required></textarea>
+    <button type="submit">Send Message</button>
+  </form>
+</section>
+
+<footer>
+  <p>&copy; 2025 Out of Country Adventures</p>
+  <div style="margin-top:10px;">
+    <a href="#" style="color:white; margin:0 10px;">Facebook</a>
+    <a href="#" style="color:white; margin:0 10px;">Instagram</a>
+    <a href="#" style="color:white; margin:0 10px;">Twitter</a>
+  </div>
+</footer>
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+const map = L.map('map').setView([20, 0], 2);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '© OpenStreetMap contributors'
+}).addTo(map);
+
+const destinations = [
+  {name:"Switzerland", coords:[46.8182, 8.2275]},
+  {name:"Paris", coords:[48.8566, 2.3522]},
+  {name:"Santorini", coords:[36.3932, 25.4615]},
+  {name:"Kenya", coords:[-1.286389, 36.817223]},
+  {name:"Bali", coords:[-8.3405, 115.0920]},
+  {name:"Tokyo", coords:[35.6762, 139.6503]},
+  {name:"Maldives", coords:[3.2028, 73.2207]},
+  {name:"Rio de Janeiro", coords:[-22.9068, -43.1729]},
+  {name:"New York", coords:[40.7128, -74.0060]},
+  {name:"Florida", coords:[27.994402, -81.760254]},
+  {name:"Alaska", coords:[64.2008, -149.4937]},
+  {name:"California", coords:[36.7783, -119.4179]}
+];
+
+// Add markers and scroll to card on click
+destinations.forEach(dest => {
+  const marker = L.marker(dest.coords).addTo(map)
+    .bindPopup(`<b>${dest.name}</b>`);
+  marker.on('click', () => {
+    const card = document.querySelector(`.place[data-name="${dest.name}"]`);
+    if(card) card.scrollIntoView({behavior:'smooth', block:'center'});
+  });
+});
+</script>
+
+</body>
+</html>
